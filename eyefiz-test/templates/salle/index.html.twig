@@ -1,0 +1,196 @@
+{% include "base.html.twig" %}
+<body>
+    <div class="col py-3">
+                <section id="" class="my-5">
+
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-11">
+
+                                <p class="text-start">  <span
+                                        class="ms-1 d-none d-sm-inline titresection"> SALLES</span> </a> </p>
+                            </div>
+
+
+                            <div class="col-1">
+                                <a  href="{{ path('app_salle_new') }}">
+                                    <i class="fs-5 bi-plus-square-fill" style="color: rgb(12, 108, 243);"></i></a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+			</section>
+            {# le tableau pour afficher les enregistrement de la table salle #}
+		<section id="" class="my-5">
+            <div class="container">
+                <div class="row col-12 align-items-center">
+                    <table class="table align-middle table-sm table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td class="border-0 red-text col-md-1" scope="col">#</td>
+                                        <td class="border-0 red-text col-md-3" scope="col">Nom</td>
+                                        <td class="border-0 red-text col-md-3" scope="col">Type</td>
+                                        <td class="border-0 red-text col-md-2" scope="col">Prix</td>
+                                        <td class="border-0 red-text col-md-2" scope="col">Surface/Capacite</td>
+                                    </tr>
+                                    <tr>
+                                    {% for salle in salles %}
+                                        <th scope="row">{{ salle.id }}</th>
+                                        <td>{{ salle.nom }}</td>
+                                        <td>{{ salle.type }}</td>
+                                        <td>{{ salle.prix }}</td>  
+                                        <td>
+                                            <span
+                                                class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ salle.surface }}</span>
+                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ salle.capacite }}</span>
+                                        </td>                                     
+                                        <td>
+										<button type="button" class="btn btn-link"><a  href="{{ path('app_salle_show', {'id': salle.id}) }}">
+											<i class="bi bi-book bi-vert"></i>
+										</a></button>
+										<button type="button" class="btn btn-link"><a  href="{{ path('app_salle_edit', {'id': salle.id}) }}">
+											<i class="bi bi-pencil-square bi-blue"></i>
+										</a></button>
+										<a class="confirmModalLink"  href="{{ path('app_salle_delete', {'id': salle.id}) }} ">
+											<i class="bi bi-trash bi-rouge"></i>
+										</a>
+									</td>
+									</tr>
+								    {% else %}
+									<tr>
+										<td colspan="11">no records found</td>
+									</tr>
+							        {% endfor %}
+                                </tbody>
+                    </table>         
+				</div>
+			</div>
+		</section>
+        {# le modalconsulter pour consulter une salle #}
+        {% if cible == "modalconsulter" %}
+            <div class="modal fade" id="modalconsulter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p class="text-start inputwithoutmargintop">
+                                <span class="invoicingsection"> CONSULTATION D'UNE SALLE  </span>
+                            </p>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row flex-nowrap">
+                                <div class="col py-3">
+                                    <section id="" class="my-5">
+                                        <div class="container">
+                                            <div class="card bg-dark text-white">
+                                                <img src="{{app.request.basepath}}/uploads/{{salle.image}}" class="card-img" alt="...">
+                                                <div class="card-img-overlay">
+                                                    <h5 class="card-title btn btn-primary">A partir de <strong class="prix">{{ salle.prix }} €</strong> HT/jour </h5>
+                                                <div class="details">
+                                                        <p class="card-text title"><strong>{{ salle.nom }}</strong></p>
+                                                        <div class="detail">
+                                                            <p class="card-text"><i class="bi bi-bookmark-star-fill"></i> {{ salle.type }}</p>
+                                                            <p class="card-text"><i class="bi bi-arrows-fullscreen"></i> {{ salle.surface }} m²</p>
+                                                            <p class="card-text"><i class="bi bi-person-fill"></i> {{ salle.capacite }} personnes</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FERMER</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% block scriptmodalconsulter %}
+                <script>
+                    var myOffcanvas = document.getElementById('modalconsulter')
+                    var bsOffcanvas = new bootstrap.Modal(myOffcanvas)
+                    bsOffcanvas.toggle()
+                </script>
+            {% endblock %}
+        {% endif %}
+        {# fin modalconsulter pour consulter une salle #}
+        {# le modalajouter pour ajouter une salle #}
+        {% if cible == "modalajouter" %}
+            <div class="modal fade" id="modalajouter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p class="text-start inputwithoutmargintop">
+                                <span class="invoicingsection"> CRÉATION D'UNE SALLE </span>
+                            </p>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row flex-nowrap">
+                                <div class="col py-3">
+                                    <section id="" class="my-5">
+                                        <div class="container">
+                                            {{ include('salle/_form.html.twig') }}
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit"  class="btn btn-primary">{{ button_label|default('AJOUTER') }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% block scriptmodalajouter %}
+                <script>
+                        var myOffcanvas = document.getElementById('modalajouter')
+                        var bsOffcanvas = new bootstrap.Modal(myOffcanvas)
+                        bsOffcanvas.toggle()
+                    </script>
+                    {% endblock %}
+            {% endif %}
+            {# fin modalajouter pour ajouter une salle #}
+            {# le modalmodifier liée au bouton modifier les informations d'une salle #}
+		    {% if cible == "modalmodifier" %}
+		        <div class="modal fade" id="modalmodifier" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <p class="text-start inputwithoutmargintop">
+                                    <span class="invoicingsection"> MODIFICATION D'une salle  </span>
+                                </p>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    {{ include('salle/_form.html.twig') }}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">{{ button_label|default('MODIFIER') }}</button>
+                            </div>
+				        </div>
+                    </div>
+                </div>
+                {% block scriptoffcanvasmodifier %}
+                <script src="https://cdn.jsdelivr.net/jsbarcode/3.3.7/barcodes/JsBarcode.code128.min.js"></script>
+                    
+                    <script>
+                        var myOffcanvas = document.getElementById('modalmodifier')
+                        var bsOffcanvas = new bootstrap.Modal(myOffcanvas)
+                        bsOffcanvas.toggle()
+                    </script>
+                {% endblock %}
+            {% endif %}
+            {# fin modalmodifier pour modifier une salle #}
+                </div>   
+            </div>
+        </div>
+    </div>
+</body>
+                        

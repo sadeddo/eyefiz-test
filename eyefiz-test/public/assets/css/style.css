@@ -1,0 +1,205 @@
+.h{
+    margin-left: 1%;
+    background-color: orange !important;
+    border-color: orange !important;
+}
+.signin_modal .nav-tabs .nav-link{
+    background-color: white;
+    border-radius:0;
+    color: black;
+}
+
+.signin_modal .nav-tabs .nav-link-active{
+    background-color: white;
+    border: none;
+}
+.signin_modal .nav-tabs .nav-item{
+    width: 0%;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-left: 24%;
+}
+.signin_modal .nav-tabs{
+    border-bottom: none;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    border: none;
+    
+}
+.nav-tabs .nav-link.active{
+    color: rgb(255, 102, 0) !important;
+}
+.btn-primary:hover{
+    border: none;
+}
+.connexion .form-control{
+    width:94% !important;
+    margin-left: 3% !important;
+    border-radius: 10px;
+    margin-bottom: 6%;
+    border:1px solid rgba(0, 0, 0, 0.33);
+    background-color: rgb(255, 252, 247);
+}
+.modal.show .modal-dialog{
+    width: 29%;
+    border-radius: 16px;
+}
+.modal-header{
+    border-bottom: 0px solid #dee2e6 !important;
+}
+p{
+    font-weight: bold;
+    font-size: larger;
+    text-align: center;
+}
+.connexion  .btn-primary{
+    background-color:rgba(0, 0, 0, 0.77) !important;
+    border-color:black !important;
+    width: 51%;
+    margin-left: 24%;
+    border-radius: 56px;
+}
+.inscription  .btn-primary{
+    background-color:rgba(0, 0, 0, 0.77) !important;
+    border-color:black !important;
+    width: 51%;
+    margin-left: 24%;
+    border-radius: 56px;
+}
+.inscription .first{
+    display: flex;
+}
+.inscription .first .end{
+    margin-left: 6%;
+}
+.inscription input::placeholder {
+    font-weight: bold;
+    opacity: .9;
+    color: rgba(0, 0, 0, 0.33);
+  	font-size:75%;
+}
+.connexion input::placeholder {
+    font-weight: bold;
+    opacity: .9;
+    color: rgba(0, 0, 0, 0.33);
+  	font-size:75%;
+}
+.inscription .form-control{
+    width:100% !important;
+    border-radius: 10px;
+    margin-bottom: 3%;
+    border:1px solid rgba(0, 0, 0, 0.33);
+    background-color: rgb(255, 252, 247);
+}
+.inscription p{
+    font-size: 11px;
+    text-align: justify;
+    color: rgb(255, 102, 0);
+    opacity: .7;
+}
+.inscription label{
+    font-size: 12px;
+}
+.form-check-label{
+    margin-bottom: 4%;
+}
+.container .card{
+    width: 350px;
+    height: 320px;
+    border-radius: 13px;
+    margin-bottom: 30px;
+
+}
+.container .row{
+    display: flex;
+    justify-content: space-around;
+}
+.container .card img{
+    width: 350px;
+    height: 320px;
+    margin-left:-4%;
+    border-radius: 13px;
+}
+body.back{
+    background-color: rgba(255, 234, 215, 0.27) !important;
+}
+
+.card .btn-primary{
+    border-radius: 56px;
+margin-left: -8%;
+margin-top: -9%;
+color: black;
+background-color: white;
+border-color: white;
+}
+.container{
+    margin-top: 3%;
+}
+.prix{
+    color: rgb(255, 102, 0);
+}
+.details{
+    background-color: rgba(0, 0, 0, 0.38);
+border-radius: 13px;
+width: 350px;
+margin-left: -5%;
+margin-top: 39%;
+height: 155px;
+}
+.detail .card-text{
+    text-align: justify;
+text-justify: inter-word;
+margin-left: 6%;
+line-height: 0rem !important;
+font-size: smaller;
+margin-top: 7%;
+}
+.details .title{
+    font-size: x-large;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-left: 6%;
+}
+.filters input{
+    width: 155px !important;
+    border: 1px solid rgba(0, 0, 0, 0.33);
+}
+#filters{
+    display: flex;
+margin-left: 7%;
+}
+.filters{
+    display: flex;
+margin-left: 7%;
+margin-bottom: 3%;
+}
+#filters .btn{
+    margin-left: 13%;
+    background-color: #ff8f00;
+border-color: #ff8f00;
+}
+.btn-check:active+.btn-primary, .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle{
+    background-color: #ff8f00 !important;
+    border-color: #ff8f00 !important;
+}
+.filters .btn-primary{
+    background-color: #ff8f00;
+border-color: #ff8f00;
+margin-left: 2%;
+}
+.connexion input::placeholder {
+    font-weight: bold;
+    opacity: .9;
+    color: rgba(0, 0, 0, 0.33);
+  	font-size:75%;
+}
+#filtre_dtStart, #filtre_dtEnd, #filtre_budget, #filtre_surface, #filtre_personnes{
+    display: inline-block;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-size: smaller;
+  }

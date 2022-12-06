@@ -1,0 +1,45 @@
+{% include 'base.html.twig' %}
+
+<body class="back">
+   <div class="container">
+   <div class="filters">
+   {#les filtres fonctionnels: type et personnes#}
+    {{ form_start(filtersForm, {'attr': {'id': 'filters'}}) }}
+        {{ form_widget(filtersForm.type) }}
+        {{ form_widget(filtersForm.dtStart) }}
+        {{ form_widget(filtersForm.dtEnd) }}
+        {{ form_widget(filtersForm.budget) }}
+        {{ form_widget(filtersForm.surface) }}
+        {{ form_widget(filtersForm.personnes) }}
+    {{ form_end(filtersForm) }}
+   <button class="btn btn-primary" onClick="window.location.reload();"><i class="bi bi-arrow-clockwise"></i></button>
+   </div>
+        <div class="row">
+            {% for salle in salles %}
+                <div class="card bg-dark text-white">
+                    <img src="{{app.request.basepath}}/uploads/{{salle.image}}" class="card-img" alt="...">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title btn btn-primary">A partir de <strong class="prix">{{ salle.prix }} €</strong> HT/jour </h5>
+                       <div class="details">
+                            <p class="card-text title"><strong>{{ salle.nom }}</strong></p>
+                            <div class="detail">
+                                <p class="card-text"><i class="bi bi-bookmark-star-fill"></i> {{ salle.type }}</p>
+                                <p class="card-text"><i class="bi bi-arrows-fullscreen"></i> {{ salle.surface }} m²</p>
+                                <p class="card-text"><i class="bi bi-person-fill"></i> {{ salle.capacite }} personnes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+   </div>
+  </div>
+  <script>
+    document.getElementById('filtre_dtStart').setAttribute('placeholder', '\uf073 date de début');
+    document.getElementById('filtre_dtEnd').setAttribute('placeholder', '\uf073 date de fin');
+    document.getElementById('filtre_budget').setAttribute('placeholder', '\uf153 Budget');
+    document.getElementById('filtre_surface').setAttribute('placeholder', '\uf31e Surface');
+    document.getElementById('filtre_personnes').setAttribute('placeholder', '\uf007 Personnes');
+  </script>
+</div>
+</body>

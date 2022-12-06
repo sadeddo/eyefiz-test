@@ -1,0 +1,114 @@
+{% include 'base.html.twig' %}
+<body>
+    <div class="d-flex align-items-center justify-content-center" style="height: 250px;">
+        <button type="button" value="Inscription" class="btn btn-primary h" data-bs-toggle="modal" data-bs-target="#modalRegister"><a  href="{{ path('app_register_new')}}">Inscription</a></button>
+        <button type="button" value="Connexion" class="btn btn-primary h" data-bs-toggle="modal" data-bs-target="#modalLogin"><a  href="{{ path('app_login')}}">Connexion</a></button>
+        <button type="button" class="btn btn-primary h"><a  href="{{ path('salles')}}">Salles</a></button>
+    </div>
+    {% if cible == "register" %}
+        <div class="modal fade" id="modalRegister"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <P>Bienvenue chez H-center</P>
+                 <form class="inscription needs-validation" onsubmit="return validation()" id="register" name="register" method="post" novalidate >
+                    <div class="mb-3 first">
+                        <input type="text" class="form-control" id="register_nom" name="register[nom]" required="required" placeholder="Nom*">
+                        <input type="text" class="form-control end" id="register_prenom" name="register[prenom]" required="required" placeholder="Prénom*">
+                    </div>
+                    <div class="mb-3 first">
+                        <input onfocus="(this.type='date')" onblur="(this.type='text')"  class="form-control"  id="register_dateNaissance" name="register[dateNaissance]" placeholder="Date de naissance*" required="required">
+                        <input type="tel" pattern="[0][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]" class="form-control end" id="register_telephone" name="register[telephone]" placeholder="Numéro de téléphone*" required="required">
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-control" name="register[type]" id="register_type" required="required">
+                            <option value="Particulier">Particulier</option>
+                            <option value="Professionnel">Professionnel</option>
+                        </select>
+                    </div>
+                    <div class="mb-3" id="bar">
+                        <input class="form-control" name="register[raisonSociale]" id="register_raisonSociale" placeholder="Raison sociale*">
+                        <input class="form-control" name="register[siret]" pattern="(?=.*[0-9]).{14,14}$" id="register_siret" placeholder="Siret*" >
+                        <input class="form-control" name="register[statutJuridique]" id="register_statutJuridique" placeholder="Statut juridique*" >
+                        <label class="form-check-label" for="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="register[dirigeant]"  id="register_dirigeant" >
+                            Etes-vous le dirigeant?</label><br>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" name="register[adresse]" id="register_adresse" placeholder="Adresse*" required="required">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" name="register[email]" id="register_email" placeholder="Adresse e-mail*" required="required">
+                    </div>
+                    <div class="mb-3 first">
+                        <input type="password" class="form-control" pattern="^(?=.*[A-Z])(?=.*[0-9]).{8,15}$" name="register[password][first]"  id="register_password_first" placeholder="Mot de passe*" required="required">
+                        <input type="password"  class="form-control end" pattern="^(?=.*[A-Z])(?=.*[0-9]).{8,15}$" name="register[password][second]" id="register_password_second"  placeholder="confirmation mot de passe *" required="required">
+                        <div class="invalid-feedback">Please make </div>
+                    </div>
+                    <p>le mot de passe doit contenir entre 8 et 15 aractères, une majuscule et un chiffre.</p>
+                   <div class="form-check">
+                   <label class="form-check-label" for="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox"  id="flexCheckDefault" required="required">
+                            j'ai lu et j'accepte <strong style="text-decoration: underline;">les conditions générales</strong> du H-center
+                        </label>
+                    </div><br>
+                    <button type="submit"   class="btn btn-primary">M'inscrire</button>
+                    {{form_row(form._token)}}
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+        {% block scriptmodalregister %}
+                <script>
+                    var myOffcanvas = document.getElementById('modalRegister')
+                    var bsOffcanvas = new bootstrap.Modal(myOffcanvas)
+                    bsOffcanvas.toggle()
+                </script>
+                <script src="/assets/js/index.js"></script>
+            {% endblock %}
+    {% endif %}
+    {% if cible == "modalLogin" %}
+        <div class="modal fade" id="modalLogin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <P>Bienvenue chez H-center</P>
+                <form method="post" class="connexion">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <input type="email"  name="email" id="inputEmail" class="form-control" placeholder="Adresse e-mail*" required>
+                    
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password*" required>
+
+                    <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Se connecter
+                    </button>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+        {% block scriptmodallogin %}
+                <script>
+                    var myOffcanvas = document.getElementById('modalLogin')
+                    var bsOffcanvas = new bootstrap.Modal(myOffcanvas)
+                    bsOffcanvas.toggle()
+                </script>
+            {% endblock %}
+    {% endif %}
+
+    
+</body>
+</html>
